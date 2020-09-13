@@ -41,3 +41,17 @@ def bag_of_words(df,n_words):
     
     
     return keys, word_vecs
+
+def encode_titles(df,col,titles = ["Mrs","Mr","Misses","Ms"]):
+    '''One hot encodes given titles on an input dataframe and column. Returns a list of one hot encoded vectors'''
+    encodings = []
+    for _,r in df.iterrows():
+        name = r[col]
+        one_hot_vec = [0 for x in range(len(titles))]
+        for i,t in enumerate(titles):
+            if t in name:
+                one_hot_vec[i]=1
+
+        encodings.append(one_hot_vec)
+                
+    return encodings
